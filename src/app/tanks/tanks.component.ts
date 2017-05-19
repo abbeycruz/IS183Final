@@ -13,16 +13,27 @@ export class TanksComponent implements OnInit {
   tanks:Array<Object>;
 
   constructor(
+    private tankService:TankService,
     private router: Router
   ) { 
   }
 
   ngOnInit() {
-    this.tanks = [];
-  }
+   this.tanks = [];
+   this.getTanks();
+   console.log('tanks',this.tanks);
+}
 
-  goToCreate() {
-    this.router.navigate(['tank-create']);
-  }
+getTanks()
+{
+  this.tankService.getTanks().then((resp)=>{
+    this.tanks = resp;
+  });
+}
 
+goToCreate()
+{
+  console.log('go to create...;');
+  this.router.navigate(['tank-create']);
+}
 }
